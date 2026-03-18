@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { DocumentationPageComponent } from './components/documentation-page/documentation-page.component';
-import { docsRouteDefinitions } from './docs/docs.data';
+import { DocumentationPageComponent } from './docs/components/documentation-page/documentation-page.component';
+import { docsRouteDefinitions } from './docs/config/docs.config';
 import { DocsLayoutComponent } from './layout/docs-layout.component';
 
 const docRoutes: Routes = docsRouteDefinitions.map((doc) => ({

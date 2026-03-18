@@ -1,7 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 
-import { docsById, docsRouteDefinitions, sidebarSections } from '../docs/docs.data';
-import { DocPage, SidebarSection } from '../docs/docs.models';
+import { docsById, docsRouteDefinitions, sidebarSections } from '../config/docs.config';
+import { DocPage, SidebarSection } from '../models/docs.models';
 
 @Injectable({ providedIn: 'root' })
 export class DocsService {

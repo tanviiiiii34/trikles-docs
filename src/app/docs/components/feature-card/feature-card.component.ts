@@ -1,17 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-import { DocFeature } from '../../docs/docs.models';
+import { DocFeature } from '../../models/docs.models';
 
 @Component({
   selector: 'app-feature-card',
   standalone: true,
+  imports: [CommonModule],
   template: `
     <article class="glass-panel rounded-[28px] border border-[var(--border)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]">
       <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--primary-soft)] text-[var(--primary)]">
         <svg viewBox="0 0 24 24" class="h-6 w-6 fill-none stroke-current stroke-[1.8]" stroke-linecap="round" stroke-linejoin="round">
-          @for (path of iconPaths(); track path) {
+          <ng-container *ngFor="let path of iconPaths(); trackBy: trackPath">
             <path [attr.d]="path"></path>
-          }
+          </ng-container>
         </svg>
       </div>
       <h3 class="mt-4 text-lg font-semibold">{{ feature.title }}</h3>
@@ -21,6 +23,10 @@ import { DocFeature } from '../../docs/docs.models';
 })
 export class FeatureCardComponent {
   @Input({ required: true }) feature!: DocFeature;
+
+  trackPath(_index: number, path: string): string {
+    return path;
+  }
 
   iconPaths(): string[] {
     const icons: Record<string, string[]> = {

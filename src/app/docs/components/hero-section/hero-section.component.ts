@@ -1,7 +1,7 @@
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Component, Input, inject } from '@angular/core';
 
-import { DocPage } from '../../docs/docs.models';
+import { DocPage } from '../../models/docs.models';
 
 @Component({
   selector: 'app-hero-section',

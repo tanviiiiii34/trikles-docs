@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 
-import { DocsService } from '../../services/docs.service';
+import { DocsService } from '../../docs/services/docs.service';
 
 @Component({
   selector: 'app-table-of-contents',
@@ -14,18 +14,21 @@ import { DocsService } from '../../services/docs.service';
         Jump between sections without losing your place.
       </p>
       <nav class="mt-4 space-y-1.5">
-        @for (item of docsService.activeDoc().toc; track item.id) {
-          <a
-            [href]="'#' + item.id"
-            class="block rounded-2xl border border-transparent px-3 py-2.5 text-sm text-[var(--muted)] transition-colors duration-200 hover:border-[var(--border)] hover:bg-[var(--primary-soft)] hover:text-[var(--foreground)]"
-          >
-            {{ item.title }}
-          </a>
-        }
+        <a
+          *ngFor="let item of docsService.activeDoc().toc; trackBy: trackItem"
+          [href]="'#' + item.id"
+          class="block rounded-2xl border border-transparent px-3 py-2.5 text-sm text-[var(--muted)] transition-colors duration-200 hover:border-[var(--border)] hover:bg-[var(--primary-soft)] hover:text-[var(--foreground)]"
+        >
+          {{ item.title }}
+        </a>
       </nav>
     </div>
   `
 })
 export class TableOfContentsComponent {
   readonly docsService = inject(DocsService);
+
+  trackItem(_index: number, item: { id: string }): string {
+    return item.id;
+  }
 }

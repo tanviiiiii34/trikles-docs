@@ -14,6 +14,7 @@ export type DocScreenshot = {
   title: string;
   caption: string;
   tags: string[];
+  imageUrl: string;
 };
 
 export type DocCodeExample = {
@@ -43,6 +44,9 @@ export type DocPage = {
   steps: DocStep[];
   screenshots: DocScreenshot[];
   codeExamples: DocCodeExample[];
+  workflowHeading?: string;
+  screenshotsHeading?: string;
+  screenshotsDescription?: string;
   toc: Array<{ id: string; title: string }>;
 };
 

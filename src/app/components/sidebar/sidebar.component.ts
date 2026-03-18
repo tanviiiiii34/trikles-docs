@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 
-import { DocsService } from '../../services/docs.service';
+import { DocsService } from '../../docs/services/docs.service';
 import { LayoutService } from '../../services/layout.service';
 import { SidebarSectionComponent } from '../sidebar-section/sidebar-section.component';
 
@@ -20,23 +20,24 @@ import { SidebarSectionComponent } from '../sidebar-section/sidebar-section.comp
             </p>
           </div>
 
-          @if (mobile) {
-            <button
-              type="button"
-              (click)="layoutService.closeMobileNav()"
-              class="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border)] text-[var(--muted)]"
-              aria-label="Close navigation"
-            >
-              X
-            </button>
-          }
+          <button
+            *ngIf="mobile"
+            type="button"
+            (click)="layoutService.closeMobileNav()"
+            class="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border)] text-[var(--muted)]"
+            aria-label="Close navigation"
+          >
+            X
+          </button>
         </div>
       </div>
 
       <div class="max-h-[calc(100vh-12rem)] overflow-y-auto px-3 py-3">
-        @for (section of docsService.sidebarSections; track section.title) {
-          <app-sidebar-section [section]="section" [mobile]="mobile" />
-        }
+        <app-sidebar-section
+          *ngFor="let section of docsService.sidebarSections; trackBy: trackSection"
+          [section]="section"
+          [mobile]="mobile"
+        />
       </div>
     </div>
   `
@@ -46,4 +47,8 @@ export class SidebarComponent {
 
   readonly docsService = inject(DocsService);
   readonly layoutService = inject(LayoutService);
+
+  trackSection(_index: number, section: { title: string }): string {
+    return section.title;
+  }
 }

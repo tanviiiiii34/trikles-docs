@@ -1,7 +1,7 @@
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Component, Input, inject, signal } from '@angular/core';
 
-import { DocCodeExample } from '../../docs/docs.models';
+import { DocCodeExample } from '../../docs/models/docs.models';
 
 @Component({
   selector: 'app-code-block',
