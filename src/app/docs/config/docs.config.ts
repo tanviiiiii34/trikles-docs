@@ -192,14 +192,7 @@ export const docsRouteDefinitions: DocPage[] = [
         title: 'Unified operations dashboard',
         caption: 'A single screen for switching between academics, finance, attendance, and day-to-day administration.',
         tags: [],
-        imageUrl: '/logo.png'
-      },
-      {
-        eyebrow: 'Navigation',
-        title: 'Reusable docs pattern',
-        caption: 'The same layout scales across modules so new documentation pages can be added without redesigning the system.',
-        tags: [],
-        imageUrl: '/logo.png'
+        imageUrl: '/introduction.png'
       }
     ],
     codeExamples: [
@@ -491,7 +484,70 @@ export const docsRouteDefinitions: DocPage[] = [
     ],
     toc: standardToc
   },
-  createGenericPage('schools', 'Schools', 'schools', 'Manage school profiles, branches, and organization-level configuration.', 'school'),
+  {
+    id: 'schools',
+    routeSegment: 'schools',
+    title: 'Schools',
+    summary: 'Manage school profiles, branches, and organization-level configuration.',
+    description:
+      'The Schools section gives administrators a clear place to review school profiles, branch details, and top-level organization settings from one streamlined management screen.',
+    audience: 'School administrators and operations teams',
+    estimatedTime: '5 min read',
+    videoUrl: 'https://www.youtube.com/embed/tgbNymZ7vqY',
+    featureCards: [
+      {
+        icon: 'school',
+        title: 'School profile management',
+        description: 'Review and maintain the main school profile and organization-level details from one place.'
+      },
+      {
+        icon: 'layers',
+        title: 'Branch visibility',
+        description: 'Keep branch-level structure and school configuration organized through a clear operational workflow.'
+      },
+      {
+        icon: 'shield',
+        title: 'Safer configuration',
+        description: 'Confirm key school settings before they affect downstream academic and operations workflows.'
+      }
+    ],
+    deepFeatures: [],
+    steps: [
+      {
+        title: 'Step 1 - Open the school profile',
+        description: 'Start from Schools to review the current organization and branch setup.'
+      },
+      {
+        title: 'Step 2 - Inspect school details',
+        description: 'Use the school management screen to review profile information and operational settings.'
+      },
+      {
+        title: 'Step 3 - Confirm the configuration',
+        description: 'Finish by validating the school record so the wider platform remains correctly configured.'
+      }
+    ],
+    screenshots: [
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Schools dashboard',
+        caption: 'This screen shows the school management workflow used to review school profile and branch information.',
+        tags: [],
+        imageUrl: '/schools.png'
+      }
+    ],
+    codeExamples: [
+      {
+        title: 'Schools API request',
+        description: 'Example request for loading school profile data into an internal dashboard.',
+        language: 'bash',
+        code: `curl -X GET "https://api.trikles.app/v1/schools" \\\n  -H "Authorization: Bearer <token>" \\\n  -H "Accept: application/json"`
+      }
+    ],
+    workflowHeading: 'Step by Step Guide',
+    screenshotsHeading: 'Screenshot Walkthrough',
+    screenshotsDescription: 'A visual walkthrough of the school profile and configuration screen.',
+    toc: walkthroughToc
+  },
   createGenericPage('exam-center', 'Exam Center', 'exams', 'Browse exam operations, schedules, and central assessment management shortcuts.', 'clipboard'),
   {
     id: 'show-exam',
@@ -1152,7 +1208,6 @@ export const sidebarSections: SidebarSection[] = [
     title: 'Exam Center',
     defaultOpen: true,
     items: [
-      { label: 'Exam Center', route: '/docs/exams', docId: 'exam-center' },
       { label: 'Add Exam', route: '/docs/exams/add-exam', docId: 'add-exam' },
       { label: 'Show Exam', route: '/docs/exams/show-exam', docId: 'show-exam' }
     ]
