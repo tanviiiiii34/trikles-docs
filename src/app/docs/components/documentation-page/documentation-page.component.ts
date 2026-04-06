@@ -527,6 +527,96 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
           </section>
         </ng-template>
 
+        <section id="screenshots" class="space-y-6">
+          <div class="px-1">
+            <p class="docs-section-title">Screenshots</p>
+            <h2 class="mt-3 text-3xl font-bold sm:text-[2rem]">
+              {{ page.screenshotsHeading ?? 'Reference views for product walkthroughs' }}
+            </h2>
+            <p *ngIf="page.screenshotsDescription" class="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
+              {{ page.screenshotsDescription }}
+            </p>
+          </div>
+
+          <div class="grid gap-6">
+            <article
+              *ngFor="let shot of page.screenshots; let index = index; trackBy: trackScreenshot"
+              class="glass-panel rounded-[32px] border border-[var(--border)] p-5 sm:p-6"
+            >
+              <div class="mb-5 flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
+                  <h3 class="mt-2 text-xl font-semibold sm:text-2xl">{{ shot.title }}</h3>
+                </div>
+                <span class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
+                  {{ index + 1 }}/{{ page.screenshots.length }}
+                </span>
+              </div>
+
+              <div class="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] xl:items-start">
+                <div class="space-y-4">
+                  <p class="max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">{{ shot.caption }}</p>
+
+                  <app-screenshot-viewer
+                    [images]="pageScreenshotImages(page.screenshots)"
+                    [initialIndex]="index"
+                    [title]="shot.title"
+                    [description]="shot.caption"
+                  ></app-screenshot-viewer>
+                </div>
+
+                <aside *ngIf="guideFor(shot.imageUrl) as guide" class="space-y-4">
+                  <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Screen Purpose</p>
+                    <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ guide.overview }}</p>
+                    <p class="mt-4 text-sm leading-7 text-[var(--muted)]">
+                      This view is part of the {{ page.title }} walkthrough and helps users understand the goal of this step
+                      before they review the visible features and interactive controls explained below.
+                    </p>
+                  </section>
+                </aside>
+              </div>
+
+              <div *ngIf="guideFor(shot.imageUrl) as guide" class="mt-6 grid gap-4 lg:grid-cols-2">
+                <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">What You Can See</p>
+                  <ul class="mt-4 space-y-3">
+                    <li
+                      *ngFor="let feature of guide.features; trackBy: trackText"
+                      class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
+                    >
+                      <span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--primary)]"></span>
+                      <span>{{ feature }}</span>
+                    </li>
+                  </ul>
+                </section>
+
+                <section *ngIf="guide.controls.length" class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Buttons and Controls</p>
+                  <ul class="mt-4 space-y-3">
+                    <li
+                      *ngFor="let control of guide.controls; trackBy: trackText"
+                      class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
+                    >
+                      <span class="mt-2 h-2.5 w-2.5 rounded-full bg-sky-400"></span>
+                      <span>{{ control }}</span>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+
+              <div *ngIf="shot.tags.length" class="mt-5 flex flex-wrap gap-2">
+                <span
+                  *ngFor="let tag of shot.tags; trackBy: trackTag"
+                  class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section id="features" class="space-y-6">
           <div class="px-1">
             <p class="docs-section-title">Highlights</p>
@@ -566,90 +656,6 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
               </div>
               <h3 class="mt-4 text-lg font-semibold">{{ step.title }}</h3>
               <p class="mt-2 text-sm leading-6 text-[var(--muted)]">{{ step.description }}</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="screenshots" class="space-y-6">
-          <div class="px-1">
-            <p class="docs-section-title">Screenshots</p>
-            <h2 class="mt-3 text-3xl font-bold sm:text-[2rem]">
-              {{ page.screenshotsHeading ?? 'Reference views for product walkthroughs' }}
-            </h2>
-            <p *ngIf="page.screenshotsDescription" class="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
-              {{ page.screenshotsDescription }}
-            </p>
-          </div>
-
-          <div class="grid gap-6">
-            <article
-              *ngFor="let shot of page.screenshots; let index = index; trackBy: trackScreenshot"
-              class="glass-panel rounded-[32px] border border-[var(--border)] p-5 sm:p-6"
-            >
-              <div class="mb-5 flex items-start justify-between gap-4">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
-                  <h3 class="mt-2 text-xl font-semibold sm:text-2xl">{{ shot.title }}</h3>
-                </div>
-                <span class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
-                  {{ index + 1 }}/{{ page.screenshots.length }}
-                </span>
-              </div>
-
-              <div class="grid gap-6 2xl:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.85fr)] 2xl:items-start">
-                <div class="space-y-4">
-                  <p class="max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">{{ shot.caption }}</p>
-
-                  <app-screenshot-viewer
-                    [images]="pageScreenshotImages(page.screenshots)"
-                    [initialIndex]="index"
-                    [title]="shot.title"
-                    [description]="shot.caption"
-                  ></app-screenshot-viewer>
-                </div>
-
-                <aside *ngIf="guideFor(shot.imageUrl) as guide" class="space-y-4">
-                  <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
-                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Screen Purpose</p>
-                    <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ guide.overview }}</p>
-                  </section>
-
-                  <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
-                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">What You Can See</p>
-                    <ul class="mt-4 space-y-3">
-                      <li
-                        *ngFor="let feature of guide.features; trackBy: trackText"
-                        class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
-                      >
-                        <span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--primary)]"></span>
-                        <span>{{ feature }}</span>
-                      </li>
-                    </ul>
-                  </section>
-
-                  <section *ngIf="guide.controls.length" class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
-                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Buttons and Controls</p>
-                    <ul class="mt-4 space-y-3">
-                      <li
-                        *ngFor="let control of guide.controls; trackBy: trackText"
-                        class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
-                      >
-                        <span class="mt-2 h-2.5 w-2.5 rounded-full bg-sky-400"></span>
-                        <span>{{ control }}</span>
-                      </li>
-                    </ul>
-                  </section>
-                </aside>
-              </div>
-
-              <div *ngIf="shot.tags.length" class="mt-5 flex flex-wrap gap-2">
-                <span
-                  *ngFor="let tag of shot.tags; trackBy: trackTag"
-                  class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]"
-                >
-                  {{ tag }}
-                </span>
-              </div>
             </article>
           </div>
         </section>

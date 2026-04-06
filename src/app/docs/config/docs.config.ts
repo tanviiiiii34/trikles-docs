@@ -4,16 +4,14 @@ const introToc = [
   { id: 'hero', title: 'Overview' },
   { id: 'modules', title: 'Main Modules' },
   { id: 'workflow', title: 'Getting Started' },
-  { id: 'screenshots', title: 'Platform Views' },
-  { id: 'code-examples', title: 'Code Examples' }
+  { id: 'screenshots', title: 'Platform Views' }
 ];
 
 const standardToc = [
   { id: 'overview', title: 'Overview' },
   { id: 'features', title: 'Highlights' },
   { id: 'workflow', title: 'Step by Step' },
-  { id: 'screenshots', title: 'Screenshots' },
-  { id: 'code-examples', title: 'Code Examples' }
+  { id: 'screenshots', title: 'Screenshots' }
 ];
 
 const walkthroughToc = [
