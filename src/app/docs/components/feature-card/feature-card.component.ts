@@ -7,8 +7,30 @@ import { DocFeature } from '../../models/docs.models';
   selector: 'app-feature-card',
   standalone: true,
   imports: [CommonModule],
+  styles: [`
+    @media (max-width: 768px) {
+      .feature-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+      }
+
+      .feature-card-title {
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .feature-card-copy {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+    }
+  `],
   template: `
-    <article class="glass-panel rounded-[28px] border border-[var(--border)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]">
+    <article class="feature-card glass-panel rounded-[28px] border border-[var(--border)] p-5 transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]">
       <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--primary-soft)] text-[var(--primary)]">
         <svg viewBox="0 0 24 24" class="h-6 w-6 fill-none stroke-current stroke-[1.8]" stroke-linecap="round" stroke-linejoin="round">
           <ng-container *ngFor="let path of iconPaths(); trackBy: trackPath">
@@ -16,8 +38,8 @@ import { DocFeature } from '../../models/docs.models';
           </ng-container>
         </svg>
       </div>
-      <h3 class="mt-4 text-lg font-semibold">{{ feature.title }}</h3>
-      <p class="mt-2 text-sm leading-6 text-[var(--muted)]">{{ feature.description }}</p>
+      <h3 class="feature-card-title mt-4 text-lg font-semibold">{{ feature.title }}</h3>
+      <p class="feature-card-copy mt-2 text-sm leading-6 text-[var(--muted)]">{{ feature.description }}</p>
     </article>
   `
 })

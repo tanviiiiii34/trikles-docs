@@ -511,52 +511,132 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
     FeatureCardComponent,
     ScreenshotViewerComponent
   ],
+  styles: [`
+    @media (max-width: 768px) {
+      .docs-panel,
+      .glass-panel {
+        overflow: hidden;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+      }
+
+      section,
+      article {
+        background: transparent !important;
+      }
+
+      .mobile-docs-shell {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .mobile-docs-panel {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .mobile-screenshot-article {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .mobile-screenshot-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .mobile-screenshot-stack > .min-w-0:first-child {
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: transparent !important;
+      }
+
+      .mobile-simple-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      .mobile-screenshot-title {
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .mobile-screenshot-copy {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .mobile-docs-h1 {
+        font-size: 22px;
+        line-height: 1.3;
+      }
+
+      .mobile-docs-h2 {
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .mobile-flow-panel {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+      }
+
+      .mobile-screenshot-stack .border {
+        border: none !important;
+        margin: 0 !important;
+      }
+    }
+  `],
   template: `
     <ng-container *ngIf="doc() as page">
-      <div class="mx-auto max-w-[1120px] space-y-10 pb-14 xl:max-w-none">
+      <div class="mobile-docs-shell w-full space-y-12 px-0 pb-16">
         <app-hero-section *ngIf="page.hero; else overviewSection" [doc]="page"></app-hero-section>
 
         <ng-template #overviewSection>
-          <section id="overview" class="docs-panel rounded-[36px] px-6 py-8 sm:px-8 sm:py-10">
+          <section id="overview" class="mobile-docs-panel docs-panel rounded-[36px] px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
             <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">
               <span class="rounded-full bg-[var(--primary-soft)] px-3 py-1">{{ page.audience }}</span>
               <span class="rounded-full border border-[var(--border)] px-3 py-1 text-[var(--muted)]">{{ page.estimatedTime }}</span>
             </div>
-            <h1 class="mt-5 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">{{ page.title }}</h1>
-            <p class="mt-4 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">{{ page.description }}</p>
+            <h1 class="mobile-docs-h1 mt-5 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">{{ page.title }}</h1>
+            <p class="mobile-screenshot-copy mt-4 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">{{ page.description }}</p>
           </section>
         </ng-template>
 
-        <section id="screenshots" class="space-y-6">
-          <div class="px-1">
+        <section id="screenshots" class="space-y-10">
+          <div class="px-1 lg:px-2">
             <p class="docs-section-title">Screenshots</p>
-            <h2 class="mt-3 text-3xl font-bold sm:text-[2rem]">
+            <h2 class="mobile-docs-h2 mt-3 text-3xl font-bold tracking-tight sm:text-[2.2rem]">
               {{ page.screenshotsHeading ?? 'Reference views for product walkthroughs' }}
             </h2>
-            <p *ngIf="page.screenshotsDescription" class="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
+            <p *ngIf="page.screenshotsDescription" class="mobile-screenshot-copy mt-4 max-w-4xl text-base leading-8 text-[var(--muted)]">
               {{ page.screenshotsDescription }}
             </p>
           </div>
 
-          <div class="grid gap-6">
+          <div class="space-y-10">
             <article
               *ngFor="let shot of page.screenshots; let index = index; trackBy: trackScreenshot"
-              class="glass-panel rounded-[32px] border border-[var(--border)] p-5 sm:p-6"
+              class="mobile-screenshot-article rounded-[36px] border border-[var(--border)] bg-[var(--surface)] px-5 py-6 shadow-[var(--card-shadow)] backdrop-blur-sm sm:px-6 sm:py-7 lg:px-8 lg:py-8"
             >
-              <div class="mb-5 flex items-start justify-between gap-4">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
-                  <h3 class="mt-2 text-xl font-semibold sm:text-2xl">{{ shot.title }}</h3>
-                </div>
-                <span class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
-                  {{ index + 1 }}/{{ page.screenshots.length }}
-                </span>
-              </div>
-
-              <div class="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] xl:items-start">
-                <div class="space-y-4">
-                  <p class="max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">{{ shot.caption }}</p>
-
+              <div class="mobile-screenshot-stack space-y-6 lg:space-y-7">
+                <div class="min-w-0">
                   <app-screenshot-viewer
                     [images]="pageScreenshotImages(page.screenshots)"
                     [initialIndex]="index"
@@ -565,65 +645,100 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
                   ></app-screenshot-viewer>
                 </div>
 
-                <aside *ngIf="guideFor(shot.imageUrl) as guide" class="space-y-4">
-                  <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
+                <div *ngIf="guideFor(shot.imageUrl) as guide; else simpleContent" class="min-w-0 space-y-5">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="max-w-[800px]">
+                      <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
+                      <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ shot.title }}</h3>
+                    </div>
+                    <span class="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
+                      {{ index + 1 }}/{{ page.screenshots.length }}
+                    </span>
+                  </div>
+
+                  <p class="mobile-screenshot-copy max-w-[800px] text-base leading-8 text-[var(--muted)] sm:text-lg">{{ shot.caption }}</p>
+
+                  <section class="mobile-flow-panel max-w-[800px] rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6">
                     <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Screen Purpose</p>
-                    <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ guide.overview }}</p>
-                    <p class="mt-4 text-sm leading-7 text-[var(--muted)]">
-                      This view is part of the {{ page.title }} walkthrough and helps users understand the goal of this step
-                      before they review the visible features and interactive controls explained below.
+                    <p class="mobile-screenshot-copy mt-3 text-sm leading-8 text-[var(--muted)]">{{ guide.overview }}</p>
+                    <p class="mobile-screenshot-copy mt-4 text-sm leading-8 text-[var(--muted)]">
+                      This step sits inside the {{ page.title }} workflow and gives the reader the context they need before
+                      moving into the visible UI elements and the actions available on this screen.
                     </p>
                   </section>
-                </aside>
-              </div>
 
-              <div *ngIf="guideFor(shot.imageUrl) as guide" class="mt-6 grid gap-4 lg:grid-cols-2">
-                <section class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
-                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">What You Can See</p>
-                  <ul class="mt-4 space-y-3">
-                    <li
-                      *ngFor="let feature of guide.features; trackBy: trackText"
-                      class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
+                  <section class="mobile-flow-panel max-w-[800px] rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">What You Can See</p>
+                    <ul class="mt-4 space-y-3">
+                      <li
+                        *ngFor="let feature of guide.features; trackBy: trackText"
+                        class="mobile-screenshot-copy flex items-start gap-3 text-sm leading-8 text-[var(--muted)]"
+                      >
+                        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--primary)]"></span>
+                        <span>{{ feature }}</span>
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section *ngIf="guide.controls.length" class="mobile-flow-panel max-w-[800px] rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Buttons and Controls</p>
+                    <ul class="mt-4 space-y-3">
+                      <li
+                        *ngFor="let control of guide.controls; trackBy: trackText"
+                        class="mobile-screenshot-copy flex items-start gap-3 text-sm leading-8 text-[var(--muted)]"
+                      >
+                        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-400"></span>
+                        <span>{{ control }}</span>
+                      </li>
+                    </ul>
+                  </section>
+
+                  <div *ngIf="shot.tags.length" class="flex max-w-[800px] flex-wrap gap-2">
+                    <span
+                      *ngFor="let tag of shot.tags; trackBy: trackTag"
+                      class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]"
                     >
-                      <span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--primary)]"></span>
-                      <span>{{ feature }}</span>
-                    </li>
-                  </ul>
-                </section>
+                      {{ tag }}
+                    </span>
+                  </div>
+                </div>
 
-                <section *ngIf="guide.controls.length" class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-5">
-                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Buttons and Controls</p>
-                  <ul class="mt-4 space-y-3">
-                    <li
-                      *ngFor="let control of guide.controls; trackBy: trackText"
-                      class="flex items-start gap-3 text-sm leading-7 text-[var(--muted)]"
-                    >
-                      <span class="mt-2 h-2.5 w-2.5 rounded-full bg-sky-400"></span>
-                      <span>{{ control }}</span>
-                    </li>
-                  </ul>
-                </section>
-              </div>
+                <ng-template #simpleContent>
+                  <div class="min-w-0 space-y-5">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="max-w-[800px]">
+                        <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
+                        <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ shot.title }}</h3>
+                      </div>
+                      <span class="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
+                        {{ index + 1 }}/{{ page.screenshots.length }}
+                      </span>
+                    </div>
 
-              <div *ngIf="shot.tags.length" class="mt-5 flex flex-wrap gap-2">
-                <span
-                  *ngFor="let tag of shot.tags; trackBy: trackTag"
-                  class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]"
-                >
-                  {{ tag }}
-                </span>
+                    <p class="mobile-screenshot-copy max-w-[800px] text-base leading-8 text-[var(--muted)] sm:text-lg">{{ shot.caption }}</p>
+
+                    <div *ngIf="shot.tags.length" class="flex max-w-[800px] flex-wrap gap-2">
+                      <span
+                        *ngFor="let tag of shot.tags; trackBy: trackTag"
+                        class="rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]"
+                      >
+                        {{ tag }}
+                      </span>
+                    </div>
+                  </div>
+                </ng-template>
               </div>
             </article>
           </div>
         </section>
 
         <section id="features" class="space-y-6">
-          <div class="px-1">
+          <div class="px-1 lg:px-2">
             <p class="docs-section-title">Highlights</p>
-            <h2 class="mt-3 text-3xl font-bold sm:text-[2rem]">What this module helps your team do</h2>
+            <h2 class="mobile-docs-h2 mt-3 text-3xl font-bold sm:text-[2rem]">What this module helps your team do</h2>
           </div>
 
-          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div class="mobile-simple-grid grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <app-feature-card
               *ngFor="let feature of page.featureCards; trackBy: trackFeature"
               [feature]="feature"
@@ -631,31 +746,31 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
           </div>
         </section>
 
-        <section *ngIf="page.deepFeatures.length" class="grid gap-4 lg:grid-cols-2">
+        <section *ngIf="page.deepFeatures.length" class="mobile-simple-grid grid gap-4 lg:grid-cols-2">
           <app-feature-card
             *ngFor="let feature of page.deepFeatures; trackBy: trackFeature"
             [feature]="feature"
           ></app-feature-card>
         </section>
 
-        <section id="workflow" class="docs-panel rounded-[36px] px-6 py-8 sm:px-8 sm:py-10">
+        <section id="workflow" class="docs-panel rounded-[36px] px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
           <div>
             <p class="docs-section-title">Step by Step</p>
-            <h2 class="mt-3 text-3xl font-bold sm:text-[2rem]">
+            <h2 class="mobile-docs-h2 mt-3 text-3xl font-bold sm:text-[2rem]">
               {{ page.workflowHeading ?? 'A clean path through ' + page.title }}
             </h2>
           </div>
 
-          <div class="mt-8 grid gap-4 lg:grid-cols-2">
+          <div class="mobile-simple-grid mt-8 grid gap-4 lg:grid-cols-2">
             <article
               *ngFor="let step of page.steps; let index = index; trackBy: trackStep"
-              class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6 shadow-[0_20px_60px_rgba(2,6,23,0.08)]"
+              class="mobile-flow-panel rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6 shadow-[0_20px_60px_rgba(2,6,23,0.08)]"
             >
               <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--primary)] text-sm font-bold text-slate-950">
                 {{ index + 1 }}
               </div>
-              <h3 class="mt-4 text-lg font-semibold">{{ step.title }}</h3>
-              <p class="mt-2 text-sm leading-6 text-[var(--muted)]">{{ step.description }}</p>
+              <h3 class="mobile-docs-h2 mt-4 text-lg font-semibold">{{ step.title }}</h3>
+              <p class="mobile-screenshot-copy mt-2 text-sm leading-6 text-[var(--muted)]">{{ step.description }}</p>
             </article>
           </div>
         </section>

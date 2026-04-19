@@ -5,12 +5,11 @@ import { RouterOutlet } from '@angular/router';
 import { LayoutService } from '../services/layout.service';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
-import { TableOfContentsComponent } from '../components/table-of-contents/table-of-contents.component';
 
 @Component({
   selector: 'app-docs-layout',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, RouterOutlet, SidebarComponent, TableOfContentsComponent],
+  imports: [CommonModule, NavbarComponent, RouterOutlet, SidebarComponent],
   template: `
     <div class="min-h-screen text-[var(--foreground)]">
       <app-navbar />
@@ -23,7 +22,7 @@ import { TableOfContentsComponent } from '../components/table-of-contents/table-
         aria-label="Close navigation menu"
       ></button>
 
-      <div class="mx-auto grid w-full max-w-layout grid-cols-1 gap-6 px-4 py-6 sm:px-6 xl:grid-cols-[260px_minmax(0,1fr)_220px] xl:gap-8 xl:px-8">
+      <div class="grid w-full grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:px-8 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-10 xl:px-8">
         <aside class="hidden xl:sticky xl:top-24 xl:block xl:h-[calc(100vh-7rem)]">
           <app-sidebar />
         </aside>
@@ -38,10 +37,6 @@ import { TableOfContentsComponent } from '../components/table-of-contents/table-
         <main class="min-w-0 xl:min-h-[calc(100vh-7rem)]">
           <router-outlet />
         </main>
-
-        <aside class="hidden xl:sticky xl:top-24 xl:block xl:h-[calc(100vh-7rem)]">
-          <app-table-of-contents />
-        </aside>
       </div>
     </div>
   `
