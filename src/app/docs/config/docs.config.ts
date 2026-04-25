@@ -191,6 +191,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'A single screen for switching between academics, finance, attendance, and day-to-day administration.',
         tags: [],
         imageUrl: '/introduction.png'
+      },
+      {
+        eyebrow: 'Overview',
+        title: 'Unified operations dashboard mv',
+        caption: 'This mobile screen introduces the platform in a vertical layout designed for smaller devices.',
+        tags: [],
+        imageUrl: '/introduction mv.png'
       }
     ],
     codeExamples: [
@@ -304,6 +311,20 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'Once questions are selected, the Add Exam window allows teachers to define the exam name, grade, and description.',
         tags: [],
         imageUrl: '/add-exam-5.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Dashboard mv',
+        caption: 'This mobile screen shows the question bank in a vertical layout so teachers can browse exam content on smaller devices.',
+        tags: [],
+        imageUrl: '/add exam mv 1.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Create Exam Window mv',
+        caption: 'This mobile screen highlights the exam creation flow in a compact vertical format for phone-sized displays.',
+        tags: [],
+        imageUrl: '/add exam mv 2.png'
       }
     ],
     codeExamples: [],
@@ -379,6 +400,20 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'Detailed student context appears inline so teachers stay inside the classroom workflow.',
         tags: ['Profile', 'Guardian', 'Activity'],
         imageUrl: '/logo.png'
+      },
+      {
+        eyebrow: 'Roster',
+        title: 'Student list with smart filters mv',
+        caption: 'This mobile screen shows the student roster in a vertical view with compact classroom details.',
+        tags: ['Roster', 'Filters', 'Status'],
+        imageUrl: '/student mv 1.png'
+      },
+      {
+        eyebrow: 'Profile',
+        title: 'Grade filter dropdown mv',
+        caption: 'This mobile screen shows the grade filter used to switch between General, LKG, UKG, and standard-wise student lists.',
+        tags: ['Grade Filter', 'Dropdown', 'Roster'],
+        imageUrl: '/student mv 2.png'
       }
     ],
     codeExamples: [
@@ -464,6 +499,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'Track paid, overdue, and partially paid requests with helpful trend indicators.',
         tags: ['Status', 'Reminders', 'Collections'],
         imageUrl: '/logo.png'
+      },
+      {
+        eyebrow: 'Composer',
+        title: 'Payment request builder mv',
+        caption: 'This mobile screen shows the payment request form in a vertical layout for phone-sized displays.',
+        tags: ['Billing', 'Due date', 'Audience'],
+        imageUrl: '/request payment mv.png'
       }
     ],
     codeExamples: [
@@ -531,6 +573,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'This screen shows the school management workflow used to review school profile and branch information.',
         tags: [],
         imageUrl: '/schools.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Schools dashboard mv',
+        caption: 'This mobile screen shows the school management workflow in a vertical layout for smaller screens.',
+        tags: [],
+        imageUrl: '/school mv.png'
       }
     ],
     codeExamples: [
@@ -722,6 +771,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'This screen shows the enrollment workflow and the status of students moving through admission.',
         tags: [],
         imageUrl: '/enrollment.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Enrollment dashboard mv',
+        caption: 'This mobile screen shows the enrollment workflow in a vertical form layout optimized for phones.',
+        tags: [],
+        imageUrl: '/enrollment mv.png'
       }
     ],
     codeExamples: [
@@ -786,6 +842,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'This screen shows how teachers can review and manage study groups from a dedicated classroom workflow.',
         tags: [],
         imageUrl: '/study-groups.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Study groups dashboard mv',
+        caption: 'This mobile screen shows the study groups workflow in a vertical layout for smaller devices.',
+        tags: [],
+        imageUrl: '/study groups mv.png'
       }
     ],
     codeExamples: [
@@ -850,6 +913,13 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'This screen shows the payment history and status view used by finance teams for review and reconciliation.',
         tags: [],
         imageUrl: '/view-payments.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Payments overview screen mv',
+        caption: 'This mobile screen shows the payment history and status workflow in a compact vertical layout.',
+        tags: [],
+        imageUrl: '/view payments mv.png'
       }
     ],
     codeExamples: [
@@ -981,7 +1051,8 @@ export const docsRouteDefinitions: DocPage[] = [
       { title: 'Step 3 - Confirm and follow up', description: 'Use the attendance screen to confirm the final record and plan follow-up where needed.' }
     ],
     screenshots: [
-      { eyebrow: 'Walkthrough', title: 'Attendance dashboard', caption: 'This screen shows the attendance workflow used to review presence and absence records.', tags: [], imageUrl: '/attendance.png' }
+      { eyebrow: 'Walkthrough', title: 'Attendance dashboard', caption: 'This screen shows the attendance workflow used to review presence and absence records.', tags: [], imageUrl: '/attendance.png' },
+      { eyebrow: 'Walkthrough', title: 'Attendance dashboard mv', caption: 'This mobile screen shows the attendance workflow in a vertical layout for smaller screens.', tags: [], imageUrl: '/attendance mv.png' }
     ],
     codeExamples: [
       {
@@ -1018,7 +1089,11 @@ export const docsRouteDefinitions: DocPage[] = [
       { title: 'Step 3 - Confirm the fit', description: 'Use the final pricing information to identify the right plan for the school.' }
     ],
     screenshots: [
-      { eyebrow: 'Walkthrough', title: 'Pricing and plans overview', caption: 'This screen presents the pricing layout used to compare plans and included features.', tags: [], imageUrl: '/pricing-and-plans.png' }
+      { eyebrow: 'Walkthrough', title: 'Pricing and plans overview', caption: 'This screen presents the pricing layout used to compare plans and included features.', tags: [], imageUrl: '/pricing-and-plans.png' },
+      { eyebrow: 'Walkthrough', title: 'Pricing and plans overview mv', caption: 'This mobile screen shows the pricing comparison flow in a vertical layout.', tags: [], imageUrl: '/pricing and plans mv 1.png' },
+      { eyebrow: 'Walkthrough', title: 'Pricing and plans details mv', caption: 'This mobile screen continues the pricing walkthrough with additional plan details for smaller devices.', tags: [], imageUrl: '/pricing and plans mv 2.png' },
+      { eyebrow: 'Walkthrough', title: 'Pricing plan comparison mv', caption: 'This mobile screen shows another step in the pricing comparison flow for phone-sized displays.', tags: [], imageUrl: '/pricing and plans mv 3.png' },
+      { eyebrow: 'Walkthrough', title: 'Pricing selection state mv', caption: 'This mobile screen shows the final pricing walkthrough state in a compact vertical format.', tags: [], imageUrl: '/pricing and plans mv 4.png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',
@@ -1054,7 +1129,10 @@ export const docsRouteDefinitions: DocPage[] = [
       { eyebrow: 'Walkthrough', title: 'Question details screen', caption: 'This view helps teams review the core details used in a question record.', tags: [], imageUrl: '/question-creation-4.png' },
       { eyebrow: 'Walkthrough', title: 'Question content workflow', caption: 'The next screen continues the content workflow for creating reusable academic questions.', tags: [], imageUrl: '/question-creation-5.png' },
       { eyebrow: 'Walkthrough', title: 'Question review stage', caption: 'This screen supports a more focused review of the question before final save.', tags: [], imageUrl: '/question-creation-6.png' },
-      { eyebrow: 'Walkthrough', title: 'Final question creation state', caption: 'The final screen completes the walkthrough for the question creation module.', tags: [], imageUrl: '/question-creation-7.png' }
+      { eyebrow: 'Walkthrough', title: 'Final question creation state', caption: 'The final screen completes the walkthrough for the question creation module.', tags: [], imageUrl: '/question-creation-7.png' },
+      { eyebrow: 'Walkthrough', title: 'Question creation start screen mv', caption: 'This mobile screen introduces the question creation workflow in a vertical layout.', tags: [], imageUrl: '/question creation mv 1.png' },
+      { eyebrow: 'Walkthrough', title: 'Question editor view mv', caption: 'This mobile screen shows the question editing workflow in a phone-friendly format.', tags: [], imageUrl: '/question creation mv 2.png' },
+      { eyebrow: 'Walkthrough', title: 'Template and content setup mv', caption: 'This mobile screen continues the question creation walkthrough with template and content setup for smaller devices.', tags: [], imageUrl: '/question creation mv 3.png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',
@@ -1085,7 +1163,9 @@ export const docsRouteDefinitions: DocPage[] = [
     ],
     screenshots: [
       { eyebrow: 'Walkthrough', title: 'Gallery overview screen', caption: 'This first screen shows the main gallery workflow for managing school media.', tags: [], imageUrl: '/gallery.png' },
-      { eyebrow: 'Walkthrough', title: 'Gallery detail view', caption: 'The second screen shows a more focused view of gallery content and media organization.', tags: [], imageUrl: '/gallery-2.png' }
+      { eyebrow: 'Walkthrough', title: 'Gallery detail view', caption: 'The second screen shows a more focused view of gallery content and media organization.', tags: [], imageUrl: '/gallery-2.png' },
+      { eyebrow: 'Walkthrough', title: 'Gallery overview screen mv', caption: 'This mobile screen shows the gallery workflow in a vertical layout for smaller devices.', tags: [], imageUrl: '/gallery mv.png' },
+      { eyebrow: 'Walkthrough', title: 'Gallery detail view mv', caption: 'This mobile screen shows a focused gallery detail view in a compact phone-sized layout.', tags: [], imageUrl: '/gallery mv 2.png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',
@@ -1116,7 +1196,9 @@ export const docsRouteDefinitions: DocPage[] = [
     ],
     screenshots: [
       { eyebrow: 'Walkthrough', title: 'Timetable planning screen', caption: 'This screen introduces the timetable workflow used to prepare schedule generation.', tags: [], imageUrl: '/timetable-1.png' },
-      { eyebrow: 'Walkthrough', title: 'Generated timetable review', caption: 'The second screen shows the timetable review state before final confirmation.', tags: [], imageUrl: '/timetable-2.png' }
+      { eyebrow: 'Walkthrough', title: 'Generated timetable review', caption: 'The second screen shows the timetable review state before final confirmation.', tags: [], imageUrl: '/timetable-2.png' },
+      { eyebrow: 'Walkthrough', title: 'Timetable planning screen mv', caption: 'This mobile screen introduces the timetable workflow in a vertical layout for smaller screens.', tags: [], imageUrl: '/timetable mv.png' },
+      { eyebrow: 'Walkthrough', title: 'Generated timetable review mv', caption: 'This mobile screen shows the timetable review state in a compact phone-friendly format.', tags: [], imageUrl: '/timetable mv 2.png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',
@@ -1147,7 +1229,9 @@ export const docsRouteDefinitions: DocPage[] = [
     ],
     screenshots: [
       { eyebrow: 'Walkthrough', title: 'Library catalog overview', caption: 'This first screen shows the library catalog view used to manage book records.', tags: [], imageUrl: '/library-1.png' },
-      { eyebrow: 'Walkthrough', title: 'Library detail workflow', caption: 'The second screen gives a more focused view of library record management and circulation workflow.', tags: [], imageUrl: '/library-2.png' }
+      { eyebrow: 'Walkthrough', title: 'Library detail workflow', caption: 'The second screen gives a more focused view of library record management and circulation workflow.', tags: [], imageUrl: '/library-2.png' },
+      { eyebrow: 'Walkthrough', title: 'Library catalog overview mv', caption: 'This mobile screen shows the library catalog in a vertical layout for easier browsing on phones.', tags: [], imageUrl: '/library mv.png' },
+      { eyebrow: 'Walkthrough', title: 'Library detail workflow mv', caption: 'This mobile screen shows the library detail workflow in a compact vertical format.', tags: [], imageUrl: '/library mv 2.png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',
@@ -1177,7 +1261,8 @@ export const docsRouteDefinitions: DocPage[] = [
       { title: 'Step 3 - Confirm the daily record', description: 'Finish by reviewing the final class entry so records remain complete and useful.' }
     ],
     screenshots: [
-      { eyebrow: 'Walkthrough', title: 'Class diary screen', caption: 'This screen shows the class diary workflow used to capture notes, homework, and daily teaching records.', tags: [], imageUrl: '/class-diary.png' }
+      { eyebrow: 'Walkthrough', title: 'Class diary screen', caption: 'This screen shows the class diary workflow used to capture notes, homework, and daily teaching records.', tags: [], imageUrl: '/class-diary.png' },
+      { eyebrow: 'Walkthrough', title: 'Class diary screen mv', caption: 'This mobile screen shows the class diary workflow in a vertical layout for daily instructional updates.', tags: [], imageUrl: '/class diary mv .png' }
     ],
     codeExamples: [],
     workflowHeading: 'Step by Step Guide',

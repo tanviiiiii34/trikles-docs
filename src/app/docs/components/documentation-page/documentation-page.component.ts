@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DocScreenshot } from '../../models/docs.models';
@@ -68,6 +68,34 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
       'Grade filter limits the list to a selected class.',
       'Phone button helps staff contact the student record directly.',
       'Pencil edits the student record, trash deletes it, and folder opens related resources or details.'
+    ]
+  },
+  '/student mv 1.png': {
+    overview: 'This mobile roster view helps staff review student records quickly while keeping the main classroom actions and details visible on a smaller screen.',
+    features: [
+      'Quick menus shortcut for moving into related classroom actions.',
+      'Grade selector at the top for filtering the student list.',
+      'Student cards showing profile image, grade, username, passcode, reward, and package details.'
+    ],
+    controls: [
+      'Quick Menus opens related classroom shortcuts.',
+      'Grade filter narrows the visible list to the selected class or level.',
+      'Phone button helps staff contact the student record directly.',
+      'Edit and other action buttons let staff update or manage student details from the card.'
+    ]
+  },
+  '/student mv 2.png': {
+    overview: 'This mobile screen highlights the grade dropdown used to switch the student roster between early-learning groups and standard-wise class lists.',
+    features: [
+      'Expanded grade dropdown showing options such as General, LKG, UKG, and STD1 through STD8.',
+      'Student roster below the filter so the list updates based on the selected grade.',
+      'Compact mobile layout that keeps the current filter and student card visible together.'
+    ],
+    controls: [
+      'All shows the complete student roster without limiting it to a single level.',
+      'General displays broad or non-grade-specific student records when used in the workflow.',
+      'LKG and UKG switch the roster to lower kindergarten and upper kindergarten student groups.',
+      'STD1 to STD8 filter the list by standard so staff can review one class level at a time.'
     ]
   },
   '/study-groups.png': {
@@ -619,7 +647,7 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
           </section>
         </ng-template>
 
-        <section id="screenshots" class="space-y-10">
+        <section *ngIf="visibleScreenshots(page.screenshots).length" id="screenshots" class="space-y-10">
           <div class="px-1 lg:px-2">
             <p class="docs-section-title">Screenshots</p>
             <h2 class="mobile-docs-h2 mt-3 text-3xl font-bold tracking-tight sm:text-[2.2rem]">
@@ -631,32 +659,33 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
           </div>
 
           <div class="space-y-10">
+            <ng-container *ngIf="visibleScreenshots(page.screenshots) as screenshots">
             <article
-              *ngFor="let shot of page.screenshots; let index = index; trackBy: trackScreenshot"
+              *ngFor="let shot of screenshots; let index = index; trackBy: trackScreenshot"
               class="mobile-screenshot-article rounded-[36px] border border-[var(--border)] bg-[var(--surface)] px-5 py-6 shadow-[var(--card-shadow)] backdrop-blur-sm sm:px-6 sm:py-7 lg:px-8 lg:py-8"
             >
               <div class="mobile-screenshot-stack space-y-6 lg:space-y-7">
-                <div class="min-w-0">
-                  <app-screenshot-viewer
-                    [images]="pageScreenshotImages(page.screenshots)"
-                    [initialIndex]="index"
-                    [title]="shot.title"
-                    [description]="shot.caption"
-                  ></app-screenshot-viewer>
-                </div>
-
-                <div *ngIf="guideFor(shot.imageUrl) as guide; else simpleContent" class="min-w-0 space-y-5">
+                <div *ngIf="guideForShot(shot, page.screenshots) as guide; else simpleContent" class="min-w-0 space-y-5">
                   <div class="flex items-start justify-between gap-4">
                     <div class="max-w-[800px]">
                       <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
-                      <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ shot.title }}</h3>
+                      <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ displayShotTitle(shot.title) }}</h3>
                     </div>
                     <span class="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
-                      {{ index + 1 }}/{{ page.screenshots.length }}
+                      {{ index + 1 }}/{{ screenshots.length }}
                     </span>
                   </div>
 
                   <p class="mobile-screenshot-copy max-w-[800px] text-base leading-8 text-[var(--muted)] sm:text-lg">{{ shot.caption }}</p>
+
+                  <div class="min-w-0">
+                    <app-screenshot-viewer
+                      [images]="pageScreenshotImages(screenshots)"
+                      [initialIndex]="index"
+                      [title]="displayShotTitle(shot.title)"
+                      [description]="shot.caption"
+                    ></app-screenshot-viewer>
+                  </div>
 
                   <section class="mobile-flow-panel max-w-[800px] rounded-[28px] border border-[var(--border)] bg-[var(--surface-strong)] p-6">
                     <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">Screen Purpose</p>
@@ -708,14 +737,23 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
                     <div class="flex items-start justify-between gap-4">
                       <div class="max-w-[800px]">
                         <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--primary)]">{{ shot.eyebrow }}</p>
-                        <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ shot.title }}</h3>
+                        <h3 class="mobile-screenshot-title mt-3 text-[2rem] font-semibold leading-tight text-[var(--foreground)] sm:text-[2.35rem]">{{ displayShotTitle(shot.title) }}</h3>
                       </div>
                       <span class="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-3 py-1 text-xs text-[var(--muted)]">
-                        {{ index + 1 }}/{{ page.screenshots.length }}
+                        {{ index + 1 }}/{{ screenshots.length }}
                       </span>
                     </div>
 
                     <p class="mobile-screenshot-copy max-w-[800px] text-base leading-8 text-[var(--muted)] sm:text-lg">{{ shot.caption }}</p>
+
+                    <div class="min-w-0">
+                      <app-screenshot-viewer
+                        [images]="pageScreenshotImages(screenshots)"
+                        [initialIndex]="index"
+                        [title]="displayShotTitle(shot.title)"
+                        [description]="shot.caption"
+                      ></app-screenshot-viewer>
+                    </div>
 
                     <div *ngIf="shot.tags.length" class="flex max-w-[800px] flex-wrap gap-2">
                       <span
@@ -729,6 +767,7 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
                 </ng-template>
               </div>
             </article>
+            </ng-container>
           </div>
         </section>
 
@@ -781,6 +820,7 @@ const SCREENSHOT_GUIDES: Record<string, ScreenshotGuide> = {
 export class DocumentationPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly docsService = inject(DocsService);
+  private readonly mobileViewport = signal(this.detectMobileViewport());
 
   readonly doc = computed(() => this.docsService.activeDoc());
 
@@ -794,8 +834,33 @@ export class DocumentationPageComponent implements OnInit {
     return screenshots.map((shot) => shot.imageUrl);
   }
 
-  guideFor(imageUrl: string): ScreenshotGuide | null {
-    return SCREENSHOT_GUIDES[imageUrl] ?? null;
+  visibleScreenshots(screenshots: DocScreenshot[]): DocScreenshot[] {
+    const mobileShots = screenshots.filter((shot) => this.isMobileVariant(shot));
+    const desktopShots = screenshots.filter((shot) => !this.isMobileVariant(shot));
+
+    if (this.mobileViewport()) {
+      return mobileShots;
+    }
+
+    return desktopShots.length ? desktopShots : screenshots;
+  }
+
+  displayShotTitle(title: string): string {
+    return title.replace(/\s+mv\b/gi, '').replace(/\bmv\b/gi, '').replace(/\s{2,}/g, ' ').trim();
+  }
+
+  guideForShot(shot: DocScreenshot, screenshots: DocScreenshot[]): ScreenshotGuide | null {
+    const directGuide = SCREENSHOT_GUIDES[shot.imageUrl];
+
+    if (directGuide) {
+      return directGuide;
+    }
+
+    const matchingDesktopShot = screenshots.find((candidate) =>
+      !this.isMobileVariant(candidate) && this.displayShotTitle(candidate.title) === this.displayShotTitle(shot.title)
+    );
+
+    return matchingDesktopShot ? SCREENSHOT_GUIDES[matchingDesktopShot.imageUrl] ?? null : null;
   }
 
   trackFeature(_index: number, feature: { title: string }): string {
@@ -816,5 +881,18 @@ export class DocumentationPageComponent implements OnInit {
 
   trackText(_index: number, text: string): string {
     return text;
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.mobileViewport.set(this.detectMobileViewport());
+  }
+
+  private isMobileVariant(shot: DocScreenshot): boolean {
+    return /\bmv\b/i.test(shot.title) || /\bmv\b/i.test(shot.imageUrl);
+  }
+
+  private detectMobileViewport(): boolean {
+    return typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
   }
 }
