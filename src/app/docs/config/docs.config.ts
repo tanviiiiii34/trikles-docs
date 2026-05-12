@@ -325,6 +325,27 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'This mobile screen highlights the exam creation flow in a compact vertical format for phone-sized displays.',
         tags: [],
         imageUrl: '/add exam mv 2.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Subject and Topic Filters mv',
+        caption: 'This mobile screen shows the subject and topic filter flow in a vertical layout for smaller devices.',
+        tags: [],
+        imageUrl: '/add exam mv 3.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Question Bank Interface mv',
+        caption: 'This mobile screen shows the question bank cards in a compact phone-friendly format.',
+        tags: [],
+        imageUrl: '/add exam mv 4.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Create Exam Window mv',
+        caption: 'This mobile screen continues the exam creation walkthrough with the final setup state for smaller displays.',
+        tags: [],
+        imageUrl: '/add exam mv 5.png'
       }
     ],
     codeExamples: [],
@@ -714,6 +735,55 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'The final screenshot completes the walkthrough and shows the closing review state for the exam.',
         tags: [],
         imageUrl: '/show-exam-9.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Show Exam Dashboard mv',
+        caption: 'This mobile screen shows the exam list and review workflow in a vertical layout for smaller devices.',
+        tags: [],
+        imageUrl: '/show exam mv 1.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Selection View mv',
+        caption: 'This mobile screen shows how users move through available exam records on phones.',
+        tags: [],
+        imageUrl: '/show exam mv 2.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Listing Details mv',
+        caption: 'This mobile screen shows the exam list with summary details in a compact vertical format.',
+        tags: [],
+        imageUrl: '/show exam mv 3.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Review Screen mv',
+        caption: 'This mobile screen shows the selected exam review state for smaller displays.',
+        tags: [],
+        imageUrl: '/show exam mv 4.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Content Overview mv',
+        caption: 'This mobile screen shows the exam content review flow in a phone-friendly layout.',
+        tags: [],
+        imageUrl: '/show exam mv 5.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Exam Status and Metadata mv',
+        caption: 'This mobile screen shows more detailed exam metadata to support review on smaller devices.',
+        tags: [],
+        imageUrl: '/show exam mv 6.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Expanded Exam Inspection mv',
+        caption: 'This mobile screen shows the focused exam inspection state in a compact vertical format.',
+        tags: [],
+        imageUrl: '/show exam mv 7.png'
       }
     ],
     codeExamples: [],
@@ -1014,6 +1084,34 @@ export const docsRouteDefinitions: DocPage[] = [
         caption: 'The final screen completes the walkthrough with a more focused academic review state.',
         tags: [],
         imageUrl: '/performance-analysis-4.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Performance dashboard overview mv',
+        caption: 'This mobile screen introduces the performance dashboard in a vertical layout for smaller devices.',
+        tags: [],
+        imageUrl: '/performance analysis mv 1.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Detailed performance breakdown mv',
+        caption: 'This mobile screen expands the analysis workflow with a more detailed performance view in a phone-friendly format.',
+        tags: [],
+        imageUrl: '/performance analysis mv 2.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Comparative analytics view mv',
+        caption: 'This mobile screen shows comparative academic analytics in a compact vertical format.',
+        tags: [],
+        imageUrl: '/performance analysis mv 3.png'
+      },
+      {
+        eyebrow: 'Walkthrough',
+        title: 'Final performance review mv',
+        caption: 'This mobile screen completes the performance analysis walkthrough with the final review state on smaller displays.',
+        tags: [],
+        imageUrl: '/performance analysis mv 4.png'
       }
     ],
     codeExamples: [

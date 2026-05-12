@@ -1,5 +1,4 @@
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { DocPage } from '../../models/docs.models';
 
@@ -103,41 +102,9 @@ import { DocPage } from '../../models/docs.models';
 
       </div>
 
-      <!-- VIDEO -->
-      <div class="mt-8 flex justify-center sm:mt-10">
-        <div class="hero-video-shell relative w-full max-w-[720px] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[#020817] p-3 shadow-[0_26px_70px_rgba(2,6,23,0.4)]">
-
-          <div class="mb-3 flex items-center gap-2 px-2">
-            <span class="h-3 w-3 rounded-full bg-rose-400"></span>
-            <span class="h-3 w-3 rounded-full bg-amber-300"></span>
-            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
-          </div>
-
-          <div class="hero-video-frame aspect-video overflow-hidden rounded-[22px] border border-white/10 bg-black">
-            <iframe
-              class="h-full w-full"
-              [src]="safeVideoUrl()"
-              title="Trikles platform walkthrough"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-
-        </div>
-      </div>
-
     </section>
   `
 })
 export class HeroSectionComponent {
-
-  private readonly sanitizer = inject(DomSanitizer);
-
   @Input({ required: true }) doc!: DocPage;
-
-  safeVideoUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.doc.videoUrl);
-  }
-
 }
